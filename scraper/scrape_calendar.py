@@ -1,30 +1,3 @@
-"""Scraper anual: calendarul ortodox → secțiunea „Anunțuri și evenimente”.
-
-Preia de pe noutati-ortodoxe.ro calendarul pentru ANUL CURENT și ANUL URMĂTOR
-(alege anul în formularul paginii — un GET cu ?year=YYYY, exact ce trimite
-<select name="year"> — apoi așteaptă ~10 secunde înainte de extragere),
-păstrează doar sărbătorile însemnate cu roșu (publicate cu ``holiday: true``,
-ca site-ul să le poată afișa distinct) și le publică în datele site-ului:
-întâi în Redis (``content:events`` — de aici citește pagina publică), apoi în
-MongoDB (``site_content`` — persistența). Evenimentele adăugate de preot din
-panoul de administrare (``source: "manual"``) sunt păstrate neatinse; doar cele
-cu ``source: "calendar"`` sunt înlocuite cu varianta proaspăt extrasă.
-
-Rulare unică, fără planificator propriu: programarea (cron) se face în
-serviciul de deployment — vezi README.md. Rulările repetate sunt idempotente
-(id-urile evenimentelor sunt deterministe: ``cal-YYYY-MM-DD``).
-
-Structura paginii pe care ne bazăm (verificată la 2026-07-18):
-    <div class="calendar" id="month1"> … <tr class="sarbatoare">
-        <td class="ziua">6</td><td class="sapt">M</td>
-        <td><a class="sinaxar" …>(†) Botezul Domnului …</a>
-            <span class="comentariu">(…)</span></td>
-    </tr> … </div>
-Rândurile „sarbatoare” sunt zilele cu roșu; duminicile obișnuite au clasa
-„sarbatoare saptamana” și sunt păstrate doar dacă textul poartă un însemn de
-sărbătoare — „(†)” sau „†)”.
-"""
-
 from __future__ import annotations
 
 import json

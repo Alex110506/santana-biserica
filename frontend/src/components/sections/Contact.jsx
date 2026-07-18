@@ -6,20 +6,24 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="scroll-mt-[70px] bg-surface px-[34px] pt-[clamp(64px,9vw,120px)] pb-0"
+      className="scroll-mt-[70px] bg-surface px-3 pt-[clamp(64px,9vw,120px)] pb-0 md:px-[34px]"
     >
       <Reveal className="mx-auto max-w-[1120px]">
         <SectionHeading kicker="Vino în mijlocul nostru" title="Contact și locație" className="mb-12" />
       </Reveal>
 
       <Reveal className="mx-auto grid max-w-[1120px] overflow-hidden rounded-lg border border-ink/14 bg-card md:grid-cols-[1fr_1.15fr]">
-        <div className="p-[clamp(32px,4vw,52px)]">
+        {/* min-w-0: lasă coloana să se strângă sub lățimea e-mailului (altfel
+            textul iese din card pe mobil); break-words rupe token-urile lungi. */}
+        <div className="min-w-0 p-5 md:p-[clamp(32px,4vw,52px)]">
           {contactRows.map((row) => (
             <div key={row.label} className="border-b border-ink/10 py-5">
               <div className="mb-2 text-[11px] tracking-[.2em] text-burgundy uppercase">
                 {row.label}
               </div>
-              <div className="text-[16.5px] leading-[1.6] text-ink">{row.value}</div>
+              <div className="text-[16.5px] leading-[1.6] break-words text-ink">
+                {row.value}
+              </div>
             </div>
           ))}
           <a

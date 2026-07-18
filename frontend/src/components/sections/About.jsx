@@ -7,7 +7,6 @@ import { Kicker } from "../ui/SectionHeading.jsx";
 const FACTS = [
   { value: "1972", label: "Anul zidirii" },
   { value: "23 apr.", label: "Ziua hramului" },
-  { value: "3", label: "Turle cu cruci" },
 ];
 
 export default function About() {
