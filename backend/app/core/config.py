@@ -6,11 +6,11 @@ anywhere configuration is needed.
 """
 
 from functools import lru_cache
-from typing import Annotated, Literal
+from typing import Literal
 from urllib.parse import urlparse
 
-from pydantic import field_validator
-from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
+
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -45,8 +45,8 @@ class Settings(BaseSettings):
     # on different domains) the browser only sends the cookie when it is
     # `SameSite=None; Secure`. On localhost, `lax` + insecure works over http.
     auth_cookie_name: str = "sb_admin_token"
-    cookie_secure: bool = False
-    cookie_samesite: Literal["lax", "strict", "none"] = "lax"
+    cookie_secure: bool = True
+    cookie_samesite: Literal["lax", "strict", "none"] = "none"
     # Optional cookie domain (e.g. ".example.com"); leave empty for host-only.
     cookie_domain: str | None = None
 
@@ -81,7 +81,10 @@ class Settings(BaseSettings):
     # --- CORS ---
     # Frontend origins allowed to call the API with credentials. Comma-separated
     # in the environment (e.g. "http://localhost:5173,https://example.com").
-    cors_origins: Annotated[list[str], NoDecode] = ["http://localhost:5173"]
+    cors_origins: list[str] = [
+        "https://vivacious-exploration-production-1d39.up.railway.app",
+        "http://localhost:5173",
+    ]
 
     @property
     def resolved_rate_limit_storage_uri(self) -> str:
@@ -110,13 +113,7 @@ class Settings(BaseSettings):
             and self.s3_public_base_url
         )
 
-    @field_validator("cors_origins", mode="before")
-    @classmethod
-    def _split_cors_origins(cls, value: object) -> object:
-        """Parse a comma-separated (or JSON) string into a list of origins."""
-        if isinstance(value, str):
-            return [origin.strip() for origin in value.split(",") if origin.strip()]
-        return value
+
 
 
 @lru_cache
