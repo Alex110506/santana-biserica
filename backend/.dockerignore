@@ -1,0 +1,25 @@
+# Environments & secrets
+.env
+.venv/
+venv/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ruff_cache/
+.pytest_cache/
+
+# Docker
+Dockerfile
+.dockerignore
+
+# OS
+.DS_Store
+
+# Git
+.git/
+.gitignore
+
+# Docs
+README.md
