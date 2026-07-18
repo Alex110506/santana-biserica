@@ -5,12 +5,14 @@ FROM python:3.12-slim AS builder
 # Install uv (fast Python package manager).
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /usr/local/bin/
 
-WORKDIR /build
+# Use /app as WORKDIR in both stages so that the venv shebangs
+# (e.g. #!/app/.venv/bin/python) resolve correctly in the runtime image.
+WORKDIR /app
 
 # Copy only dependency files first to maximise Docker layer caching.
 COPY pyproject.toml uv.lock ./
 
-# Install production dependencies into a virtual-env at /build/.venv.
+# Install production dependencies into /app/.venv.
 # --frozen ensures the lockfile is used exactly as-is.
 RUN uv sync --frozen --no-dev --no-install-project
 
@@ -31,10 +33,10 @@ RUN groupadd --system app && useradd --system --gid app app
 WORKDIR /app
 
 # Bring in the virtual-env and source from the builder.
-COPY --from=builder /build/.venv /app/.venv
-COPY --from=builder /build/app   /app/app
-COPY --from=builder /build/scripts /app/scripts
-COPY --from=builder /build/pyproject.toml /app/pyproject.toml
+COPY --from=builder /app/.venv /app/.venv
+COPY --from=builder /app/app   /app/app
+COPY --from=builder /app/scripts /app/scripts
+COPY --from=builder /app/pyproject.toml /app/pyproject.toml
 
 # Put the venv's Python and binaries on PATH.
 ENV PATH="/app/.venv/bin:$PATH"
