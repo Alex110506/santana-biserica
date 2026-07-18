@@ -1,0 +1,12 @@
+# Environments
+.env
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+.ruff_cache/
+
+# OS
+.DS_Store

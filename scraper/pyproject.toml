@@ -1,0 +1,26 @@
+[project]
+name = "santana-biserica-scraper"
+version = "0.1.0"
+description = "Scraper anual: calendarul ortodox (noutati-ortodoxe.ro) → Redis + MongoDB, secțiunea „Anunțuri și evenimente”."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "requests>=2.32.0",
+    "beautifulsoup4>=4.12.0",
+    "pymongo>=4.9.0",
+    "redis>=5.2.0",
+    "python-dotenv>=1.0.0",
+    "lxml>=6.1.1",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.7.0",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
