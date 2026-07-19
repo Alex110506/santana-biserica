@@ -7,9 +7,7 @@
 
 /** Normalise `VITE_BACKEND_URL` — ensure a scheme and no trailing slash. */
 function resolveBaseUrl() {
-  const raw = (import.meta.env.VITE_BACKEND_URL ?? "").trim();
-  // In production the env var may be absent — fall back to the deployed backend.
-  const url = raw || "https://api.parohia-santana-1.ro";
+  const url = "https://api.parohia-santana-1.ro";
   const withScheme = /^https?:\/\//i.test(url) ? url : `http://${url}`;
   return withScheme.replace(/\/+$/, "");
 }
