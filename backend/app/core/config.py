@@ -82,7 +82,8 @@ class Settings(BaseSettings):
     # Frontend origins allowed to call the API with credentials. Comma-separated
     # in the environment (e.g. "http://localhost:5173,https://example.com").
     cors_origins: list[str] = [
-        "https://vivacious-exploration-production-1d39.up.railway.app",
+        "https://parohia-santana-1.ro",
+        "https://www.parohia-santana-1.ro",
         "http://localhost:5173",
     ]
 

@@ -50,6 +50,8 @@ export default function About() {
           <img
             src="https://pub-8a480fbbd11b44939d3c3e5ff976f221.r2.dev/church_facade.png"
             alt="Fațada bisericii în lumina soarelui"
+            loading="lazy"
+            decoding="async"
             className="block h-[clamp(420px,60vh,620px)] w-full object-cover"
           />
         </Reveal>

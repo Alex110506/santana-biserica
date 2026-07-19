@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { parish } from "../data/site.js";
 import CrossIcon from "../components/ui/CrossIcon.jsx";
+import usePageMeta from "../hooks/usePageMeta.js";
 import { login } from "../lib/auth.js";
 
 /**
@@ -11,6 +12,9 @@ import { login } from "../lib/auth.js";
  * success; the admin is then redirected to the protected dashboard.
  */
 export default function LoginPage() {
+  // Zona de administrare nu se indexează (vezi și robots.txt / X-Robots-Tag).
+  usePageMeta({ title: "Autentificare - Parohia Sântana I", robots: "noindex, nofollow" });
+
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");

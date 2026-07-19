@@ -121,7 +121,7 @@ export default function Announcements() {
                   </div>
                   <div>
                     <div className="mb-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <span className="font-heading text-[22px] text-ink">{event.title}</span>
+                      <h3 className="font-heading text-[22px] font-normal text-ink">{event.title}</h3>
                       {event.time && (
                         <span className="text-[13.5px] whitespace-nowrap text-burgundy tabular-nums">
                           ora {event.time}

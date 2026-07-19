@@ -17,6 +17,7 @@ export default function Navbar() {
   return (
     <>
       <nav
+        aria-label="Navigare principală"
         className={`fixed inset-x-0 top-0 z-50 flex items-center justify-between border-b px-[34px] py-[14px] backdrop-blur-[10px] transition-colors duration-500 ${
           scrolled
             ? "border-ink/10 bg-[rgba(243,242,242,.92)]"

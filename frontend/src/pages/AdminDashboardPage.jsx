@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../lib/auth.js";
 import { parish } from "../data/site.js";
 import CrossIcon from "../components/ui/CrossIcon.jsx";
+import usePageMeta from "../hooks/usePageMeta.js";
 import AboutEditor from "../components/admin/AboutEditor.jsx";
 import ScheduleEditor from "../components/admin/ScheduleEditor.jsx";
 import GalleryEditor from "../components/admin/GalleryEditor.jsx";
@@ -25,6 +26,9 @@ const SECTIONS = [
  * marks the ones with unsaved changes.
  */
 export default function AdminDashboardPage() {
+  // Zona de administrare nu se indexează (vezi și robots.txt / X-Robots-Tag).
+  usePageMeta({ title: "Administrare - Parohia Sântana I", robots: "noindex, nofollow" });
+
   const navigate = useNavigate();
   const [dirtySections, setDirtySections] = useState({});
   const [activeId, setActiveId] = useState(SECTIONS[0].id);

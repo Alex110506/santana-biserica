@@ -62,6 +62,8 @@ export default function Gallery() {
               key={img.id}
               src={img.url}
               alt={img.caption}
+              loading="lazy"
+              decoding="async"
               className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1200ms] ${
                 i === index ? "z-[2] opacity-100" : "z-[1] opacity-0"
               }`}
@@ -107,7 +109,13 @@ export default function Gallery() {
                 i === index ? "border-burgundy opacity-100" : "border-transparent opacity-50"
               }`}
             >
-              <img src={img.url} alt="" className="block h-full w-full object-cover" />
+              <img
+                src={img.url}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="block h-full w-full object-cover"
+              />
             </button>
           ))}
         </div>

@@ -30,11 +30,11 @@ export default function Footer() {
           </div>
           <div>
             <div className="mb-3.5 text-[11px] tracking-[.2em] text-gold uppercase">Contact</div>
-            <div className="text-[14.5px] leading-[1.9] text-night-mute">
+            <address className="text-[14.5px] leading-[1.9] text-night-mute not-italic">
               {footerAddress.map((line) => (
                 <div key={line}>{line}</div>
               ))}
-            </div>
+            </address>
           </div>
         </div>
       </div>

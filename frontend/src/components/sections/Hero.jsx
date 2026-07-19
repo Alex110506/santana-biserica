@@ -29,6 +29,7 @@ export default function Hero() {
         </div>
 
         <h1 className="font-heading text-[clamp(40px,7vw,86px)] leading-[1.02] font-normal tracking-normal [text-shadow:0_2px_30px_rgba(0,0,0,.35)]">
+          <span className="sr-only">Biserica Ortodoxă </span>
           Sfântul Mare Mucenic
           <br />
           <span className="text-gold-light">Gheorghe</span>

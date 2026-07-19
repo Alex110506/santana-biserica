@@ -4,11 +4,81 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Primary SEO. The production URL below (canonical, og:url, JSON-LD) must be
+         kept in sync with public/robots.txt and public/sitemap.xml if the parish
+         ever moves to its own domain. -->
+    <title>Biserica Ortodoxă „Sf. M. Mc. Gheorghe” - Parohia Sântana I, Arad</title>
     <meta
       name="description"
-      content="Biserica Ortodoxă „Sfântul Mare Mucenic Gheorghe”, Parohia Sântana I, județul Arad - programul slujbelor, galerie foto, anunțuri și contact."
+      content="Biserica Ortodoxă „Sfântul Mare Mucenic Gheorghe”, Parohia Sântana I, județul Arad - programul slujbelor, anunțuri și sărbători, galerie foto și date de contact."
     />
-    <title>Biserica „Sf. M. Mc. Gheorghe” - Sântana</title>
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://parohia-santana-1.ro/" />
+    <meta name="theme-color" content="#14161c" />
+    <meta name="geo.region" content="RO-AR" />
+    <meta name="geo.placename" content="Sântana" />
+
+    <!-- Open Graph / social sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Parohia Ortodoxă Română Sântana I" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:url" content="https://parohia-santana-1.ro/" />
+    <meta property="og:title" content="Biserica Ortodoxă „Sf. M. Mc. Gheorghe” - Parohia Sântana I, Arad" />
+    <meta
+      property="og:description"
+      content="Programul slujbelor, anunțuri și sărbători, galerie foto și date de contact ale Parohiei Ortodoxe Române Sântana I, județul Arad."
+    />
+    <meta
+      property="og:image"
+      content="https://pub-8a480fbbd11b44939d3c3e5ff976f221.r2.dev/church-front-cloudy.png"
+    />
+    <meta property="og:image:alt" content="Biserica „Sf. M. Mc. Gheorghe” din Sântana, văzută din față" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Biserica Ortodoxă „Sf. M. Mc. Gheorghe” - Parohia Sântana I, Arad" />
+    <meta
+      name="twitter:description"
+      content="Programul slujbelor, anunțuri și sărbători, galerie foto și date de contact ale Parohiei Ortodoxe Române Sântana I, județul Arad."
+    />
+    <meta
+      name="twitter:image"
+      content="https://pub-8a480fbbd11b44939d3c3e5ff976f221.r2.dev/church-front-cloudy.png"
+    />
+
+    <!-- The hero photo is a CSS background, so the browser would only discover it
+         after the JS bundle runs - preloading it cuts the LCP time. -->
+    <link rel="preconnect" href="https://pub-8a480fbbd11b44939d3c3e5ff976f221.r2.dev" crossorigin />
+    <link
+      rel="preload"
+      as="image"
+      href="https://pub-8a480fbbd11b44939d3c3e5ff976f221.r2.dev/church-front-cloudy.png"
+      fetchpriority="high"
+    />
+
+    <!-- Structured data: lets Google show the church as a place (address, telefon,
+         hartă) direct în rezultatele căutării. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Church",
+        "name": "Biserica Ortodoxă „Sfântul Mare Mucenic Gheorghe” Sântana",
+        "alternateName": "Parohia Ortodoxă Română Sântana I",
+        "url": "https://parohia-santana-1.ro/",
+        "image": "https://pub-8a480fbbd11b44939d3c3e5ff976f221.r2.dev/church-front-cloudy.png",
+        "telephone": "+40 744 779 270",
+        "email": "parohia.ortodoxa.romana.santana.I@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Str. Ion Creangă nr. 5",
+          "addressLocality": "Sântana",
+          "postalCode": "317280",
+          "addressRegion": "Arad",
+          "addressCountry": "RO"
+        },
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=Biserica%20Ortodox%C4%83%20Sf.%20M.%20Mucenic%20Gheorghe%2C%20S%C3%A2ntana%2C%20Arad",
+        "isAccessibleForFree": true
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -34,7 +34,7 @@ export default function Clergy() {
             <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full border border-gold/50 text-gold">
               <CrossIcon />
             </div>
-            <div className="mb-1.5 font-heading text-[25px] text-cream">{person.name}</div>
+            <h3 className="mb-1.5 font-heading text-[25px] font-normal text-cream">{person.name}</h3>
             <div className="text-[12.5px] tracking-[.16em] text-gold uppercase">{person.role}</div>
           </div>
         ))}

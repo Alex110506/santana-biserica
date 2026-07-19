@@ -1,0 +1,8 @@
+# Doar pagina principală este publică; zona de administrare nu se indexează.
+# Ține URL-ul de mai jos în sinc cu canonical-ul din index.html și sitemap.xml.
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /admin/
+
+Sitemap: https://parohia-santana-1.ro/sitemap.xml
