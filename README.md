@@ -73,9 +73,9 @@ together, so the two stores stay in lockstep.
 
 ### External services
 
-- **MongoDB instance** — primary NoSQL datastore: `site_content` (one
-  document per section), `photo_gallery` (image references),
-  `admin_accounts` (bcrypt hashes).
+- **MongoDB instance** — primary NoSQL datastore (a Railway database
+  service): `site_content` (one document per section), `photo_gallery`
+  (image references), `admin_accounts` (bcrypt hashes).
 - **Cloudflare R2 + CDN** — object storage for gallery image bytes, served
   to visitors from the bucket's public URL.
 - **noutati-ortodoxe.ro** — the external Orthodox calendar website the
@@ -134,15 +134,22 @@ uv run python scrape_calendar.py   # needs MONGO_URL + REDIS_URL in scraper/.env
 
 ## Deployment
 
-- **Frontend → Vercel** — `vercel.json` rewrites everything to the SPA shell
-  and noindexes `/login` and `/admin/*`. A `Dockerfile` + `nginx.conf`
-  (port 3000) exists as a self-hosted alternative with equivalent caching
-  and robots headers.
-- **Backend → Railway** — multi-stage `backend/Dockerfile` (uv build,
-  non-root runtime, Uvicorn on 8000 with `--proxy-headers`), reaching Redis
-  over the private network. CORS allows the production domains and
-  `localhost:5173`, with credentials.
-- **Scraper → Railway cron job** — `scraper/Dockerfile`, scheduled yearly.
-- **MongoDB, Redis, R2** — provisioned as managed services; connection
-  details are injected through environment variables (see
+Everything is hosted on **Railway** — frontend, backend, scraper, and both
+databases run as services in a single project and talk to each other over the
+private network:
+
+- **Frontend** — built and served by `frontend/Dockerfile`: Vite build →
+  nginx (`nginx.conf`, port 3000) with the SPA fallback, immutable caching
+  for hashed assets, and `noindex` headers on `/login` and `/admin/*`.
+  (A `vercel.json` with equivalent rewrites/headers is kept in the repo as
+  an optional Vercel deployment path.)
+- **Backend** — multi-stage `backend/Dockerfile` (uv build, non-root
+  runtime, Uvicorn on 8000 with `--proxy-headers`). CORS allows the
+  production domains and `localhost:5173`, with credentials.
+- **Scraper** — `scraper/Dockerfile`, run as a Railway cron job (monthly).
+- **MongoDB & Redis** — Railway database services; their connection URLs are
+  injected into the backend and scraper through environment variables (see
   `backend/.env.example` and the scraper README).
+
+The only piece outside Railway is **Cloudflare R2**, which stores and serves
+the gallery images.
