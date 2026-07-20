@@ -2,7 +2,16 @@
 <html lang="ro">
   <head>
     <meta charset="UTF-8" />
+    <!-- ICO first as the universal fallback (also what crawlers/old browsers
+         request by default at /favicon.ico), then SVG for browsers that
+         support it, then explicit PNG sizes - Google Search's favicon
+         feature has been unreliable with an SVG-only setup. -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary SEO. The production URL below (canonical, og:url, JSON-LD) must be
