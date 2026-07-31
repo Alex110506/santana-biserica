@@ -24,10 +24,15 @@ export default function About() {
             {about.title}
           </h2>
           <div className="mb-[26px] h-px w-14 bg-bronze" />
-          <div
-            className="text-justify text-[16.5px] leading-[1.85] text-ink-soft [&_strong]:font-semibold [&_b]:font-semibold"
-            dangerouslySetInnerHTML={{ __html: about.html }}
-          />
+          {/* The text can now run up to ~2000 words, so it lives in its own
+              scroll panel rather than pushing the whole page (and the paired
+              photo) down. Short texts simply don't scroll. */}
+          <div className="scroll-panel max-h-[clamp(340px,50vh,560px)] overflow-y-auto pr-4">
+            <div
+              className="text-justify text-[16.5px] leading-[1.85] text-ink-soft [&_strong]:font-semibold [&_b]:font-semibold"
+              dangerouslySetInnerHTML={{ __html: about.html }}
+            />
+          </div>
 
           <div className="mt-[38px] flex flex-wrap gap-[38px]">
             {FACTS.map((fact, i) => (

@@ -35,10 +35,14 @@ export const galleryImages = [
   { src: "/assets/church-side.png", alt: "Vedere laterală a locașului" },
 ];
 
-/** Only priests are listed in „Preoți și cler” (no cântăreț, paracliser etc.). */
+/**
+ * Only priests are listed in „Preoți și cler” (no cântăreț, paracliser etc.).
+ * `startYear`/`endYear` give the years of ministry at the parish; `current: true`
+ * means still serving („încă în funcție”), in which case `endYear` is ignored.
+ */
 export const clergy = [
-  { name: "Pr. Nicolae Rădulescu", role: "Preot paroh" },
-  { name: "Pr. Andrei Munteanu", role: "Preot slujitor" },
+  { name: "Pr. Nicolae Rădulescu", role: "Preot paroh", startYear: 1998, endYear: null, current: true },
+  { name: "Pr. Andrei Munteanu", role: "Preot slujitor", startYear: 2010, endYear: null, current: true },
 ];
 
 /**

@@ -2,7 +2,7 @@
 
 One model per section, mirroring the dashboard's client-side rules so the API
 enforces them authoritatively (the frontend checks are UX, not security):
-„Despre parohie” (rich text ≤ 550 plain chars, whitelisted tags only),
+„Despre parohie” (rich text ≤ 14000 plain chars ≈ 2000 words, whitelisted tags only),
 „Rânduiala săptămânii” (weekly/monthly cadence), „Galerie foto” (≤ 20 images),
 „Preoți și cler” (only priest roles) and „Anunțuri și evenimente” (dated).
 """
@@ -18,7 +18,8 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 
 # --- Despre parohie ---------------------------------------------------------
 
-ABOUT_MAX_CHARS = 550
+# ~2000 words of Romanian prose; plain-text length is what's enforced below.
+ABOUT_MAX_CHARS = 14_000
 # Formatting the editor may produce; everything else is stripped server-side.
 ALLOWED_ABOUT_TAGS = {"b", "strong", "i", "em", "u", "p", "div", "br"}
 
@@ -37,7 +38,7 @@ class AboutContent(BaseModel):
     """„Despre parohie” — section title plus limited rich text."""
 
     title: str = Field(min_length=1, max_length=90)
-    html: str = Field(max_length=8_000)  # raw ceiling; real limit is plain text
+    html: str = Field(max_length=80_000)  # raw ceiling; real limit is plain text
 
     @field_validator("html")
     @classmethod
@@ -112,13 +113,38 @@ class GalleryUploadResponse(BaseModel):
 
 # --- Preoți și cler ---------------------------------------------------------
 
+CLERGY_MIN_YEAR = 1700
+CLERGY_MAX_YEAR = 2100
+
 
 class ClergyMember(BaseModel):
-    """Only priests are shown on the site — the roles are a closed set."""
+    """Only priests are shown on the site — the roles are a closed set.
+
+    Each priest also carries the years of his ministry at the parish:
+    ``startYear`` (when he began) and either ``endYear`` (when he left) or
+    ``current=True`` — „încă în funcție”, still serving. The public page orders
+    priests chronologically by ``startYear`` and shows the period under the role.
+    """
 
     id: str = Field(min_length=1, max_length=64)
     name: str = Field(min_length=1, max_length=80)
     role: Literal["Preot paroh", "Preot slujitor"]
+    startYear: int | None = Field(default=None, ge=CLERGY_MIN_YEAR, le=CLERGY_MAX_YEAR)
+    endYear: int | None = Field(default=None, ge=CLERGY_MIN_YEAR, le=CLERGY_MAX_YEAR)
+    current: bool = False
+
+    @model_validator(mode="after")
+    def _validate_years(self) -> ClergyMember:
+        # „Încă în funcție” and an explicit end year are mutually exclusive —
+        # the flag wins and clears any end year.
+        if self.current:
+            self.endYear = None
+        elif self.endYear is not None:
+            if self.startYear is None:
+                raise ValueError("anul de final are nevoie de un an de început")
+            if self.endYear < self.startYear:
+                raise ValueError("anul de final nu poate fi înaintea celui de început")
+        return self
 
 
 class ClergyContent(BaseModel):

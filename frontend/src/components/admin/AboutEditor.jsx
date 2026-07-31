@@ -6,9 +6,9 @@ import RichTextEditor from "./RichTextEditor.jsx";
 import useSectionDraft from "./useSectionDraft.js";
 import { FieldLabel, inputClass } from "./fields.jsx";
 
-export const ABOUT_MAX_CHARS = 550;
+export const ABOUT_MAX_CHARS = 14000;
 
-/** Editor for „Despre parohie” — section title + rich text (max 550 chars). */
+/** Editor for „Despre parohie” — section title + rich text (max ~2000 words). */
 export default function AboutEditor({ sectionId, onDirtyChange }) {
   const { draft, setDraft, dirty, discard, reset } = useSectionDraft(initialAbout);
   const [loading, setLoading] = useState(true);
@@ -58,7 +58,7 @@ export default function AboutEditor({ sectionId, onDirtyChange }) {
       id={sectionId}
       kicker="Pagina principală"
       title="Despre parohie"
-      description={`Titlul și textul de prezentare de pe pagina principală. Selectați textul pentru a-l formata (aldin, cursiv, subliniat) — fontul, mărimea și culoarea literelor rămân cele ale site-ului. Cel mult ${ABOUT_MAX_CHARS} de caractere.`}
+      description={`Titlul și textul de prezentare de pe pagina principală. Selectați textul pentru a-l formata (aldin, cursiv, subliniat) — fontul, mărimea și culoarea literelor rămân cele ale site-ului. Cel mult ${ABOUT_MAX_CHARS.toLocaleString("ro-RO")} de caractere (aproximativ 2000 de cuvinte).`}
       dirty={dirty}
       error={error}
       loading={loading}
