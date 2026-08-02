@@ -43,6 +43,17 @@ export default function Footer() {
         <span>
           © {new Date().getFullYear()} Parohia „{parish.shortName}”, Sântana I
         </span>
+        <span>
+          Website creat de:{" "}
+          <a
+            href="https://www.linkedin.com/in/alexandru-r%C4%83dulescu-12b115264/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-night-soft no-underline hover:text-gold-light"
+          >
+            Alexandru Radulescu
+          </a>
+        </span>
         <span>{parish.psalm}</span>
       </div>
     </footer>
