@@ -42,7 +42,6 @@ export const galleryImages = [
  */
 export const clergy = [
   { name: "Pr. Nicolae Rădulescu", role: "Preot paroh", startYear: 1998, endYear: null, current: true },
-  { name: "Pr. Andrei Munteanu", role: "Preot slujitor", startYear: 2010, endYear: null, current: true },
 ];
 
 /**
