@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 import ProtectedRoute from "./components/auth/ProtectedRoute.jsx";
 
 export default function App() {
@@ -17,6 +18,7 @@ export default function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
